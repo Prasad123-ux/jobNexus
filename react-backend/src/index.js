@@ -13,6 +13,11 @@ const { deleteJobRoute } = require('./Routes/Company/DeleteJobs')
 const { getAllJobsRoutes } = require('./Routes/Candidate/GetAllJobs')
 const { getJobByIDRoute } = require('./Routes/Candidate/GetJobById')
 const { registerCandidateRoute } = require('./Routes/Candidate/RegisterCadidate')
+const { loginCandidateRoute } = require('./Routes/Candidate/Login')
+const { updateDataRoute } = require('./Routes/Candidate/update')
+const { getProfileDataRoute } = require('./Routes/Candidate/GetProfileData')
+const { saveJobsRoutes } = require('./Routes/Candidate/SaveJobs')
+const { GetAllSavedJobsRoute } = require('./Routes/Candidate/GetAllSavedJob')
 
 
 
@@ -30,6 +35,12 @@ app.use('/api/company', deleteJobRoute)
 app.use('/api/candidate', getAllJobsRoutes)
 app.use('/api/candidate', getJobByIDRoute)
 app.use('/api/candidate', registerCandidateRoute)
+app.use('/api/candidate', loginCandidateRoute)
+app.use('/api/candidate', updateDataRoute)
+app.use('/api/candidate', getProfileDataRoute)
+app.use('/api/candidate', saveJobsRoutes)
+app.use('/api/candidate', deleteJobRoute)
+app.use('/api/candidate', GetAllSavedJobsRoute)
 
 
 

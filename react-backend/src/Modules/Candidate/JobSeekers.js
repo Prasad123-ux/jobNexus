@@ -90,7 +90,7 @@ Language:[
         Proficiency:String,
     }
 ],
-reference:[
+Reference:[
     {
         Name:String,
         Relationship:String,
