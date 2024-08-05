@@ -5,7 +5,7 @@ const getProfileDataRoute= express.Router()
 
 
 
-getProfileDataRoute.get('/getProfileData',candidateAuthenticationMiddleware , getProfileDataController)
+getProfileDataRoute.post('/getProfileData' ,candidateAuthenticationMiddleware, getProfileDataController)
 
 
 module.exports={getProfileDataRoute}

@@ -3,6 +3,6 @@ const { profileDataController } = require('../../Controllers/Company/ProfileData
 const profileDataRoute= express.Router() 
 
 
-profileDataRoute.get('/getProfileData', profileDataController)
+profileDataRoute.post('/getProfileData', profileDataController)
 
 module.exports={profileDataRoute}

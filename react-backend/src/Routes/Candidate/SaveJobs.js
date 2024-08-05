@@ -5,7 +5,7 @@ const saveJobsRoutes= express.Router()
 
 
 
-saveJobsRoutes.post('/save_job',candidateAuthenticationMiddleware,  SaveJobsController)
+saveJobsRoutes.get('/save_job',  candidateAuthenticationMiddleware,SaveJobsController)
 
 
 module.exports={saveJobsRoutes}
