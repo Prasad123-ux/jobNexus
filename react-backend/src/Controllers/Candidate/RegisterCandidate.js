@@ -7,100 +7,106 @@ env.config()
 
 
 const RegisterCandidateController=(req, res)=>{
-    console.log(req.body.projects[0].title)
-
+    // console.log(req.body.projects[0].title)
+    console.log(req.body)
+const userData= req.body.userData
+console.log(userData.password)
 const error= validationResult(req)
 
 if(!error.isEmpty()){
-    res.status(404).json({success:false, message:"validation error", error:error})
+    res.status(400).json({success:false, message:"validation error", error:error.errors[0].msg})
 }else{
    
 
-    JobSeekerDetail.findOne({Email:req.body.email}).exec()
+    JobSeekerDetail.findOne({Email:userData.email}).exec()
     .then((user)=>{
-        //  console.log(user)
+        //  console.log(user)     
         if(user!==null){
 
-            res.status(404).json({success:false, message:"user already found"})
+            res.status(400).json({success:false, message:"user already found"})
         }else{
             
 
         
             const salt=10
-            bcrypt.hash(req.body.password, salt,(err, result)=>{
+            bcrypt.hash(userData.password, salt,(err, result)=>{
                 if(err){
-                    res.status(400).json({success:false, message:"ohh1 there is some error", error:err})
+                    res.status(400).json({success:false, message:"ohh1 there is some error", error:err.message})
                 }else if(result){
-                    req.body.password= result 
+                    userData.password= result 
                     // console.log(req.body.password)
 
 
                     const candidateObject=new JobSeekerDetail({
+                    FullName:userData.fullName,
+                    Email:userData.email,
+                    Password:userData.password,
+                    WorkStatus:userData.workStatus,
+                    City:userData.city,
+                    MobileNumber:userData.mobileNumber
+                    //    FullName : req.body.fullName ||"",
+                    //     DateOfBirth:req.body.dateOfBirth ||"",
+                    //     Gender:req.body.gender || "",
+                    //     Email:req.body.email || "",
+                    //     Password:req.body.password ||"",
+                    //     MobileNumber:req.body.mobileNumber ||"",
+                    //     Address:req.body.address ||"" ,
+                    //     Education:req.body.education.map(edu=>({
+                    //          Degree:edu.degree,
+                    //          Major:edu.Major,
+                    //          University:edu.university,
+                    //          GraduationYear:edu.graduationYear,
+                    //          GPA:edu.gpa
 
-                        FirstName:req.body.firstName,
-                        LastName:req.body.lastName,
-                        DateOfBirth:req.body.dateOfBirth,
-                        Gender:req.body.gender,
-                        Email:req.body.email,
-                        Password:req.body.password,
-                        MobileNumber:req.body.mobileNumber,
-                        Address:req.body.address ,
-                        Education:req.body.education.map(edu=>({
-                             Degree:edu.degree,
-                             Major:edu.Major,
-                             University:edu.university,
-                             GraduationYear:edu.graduationYear,
-                             GPA:edu.gpa
 
-
-                        })),
-                        WorkExperience:req.body.workExperience.map(work=>({
-                            JobTitle: work.jobTitle,
-                            CompanyName: work.companyName,
-                            Duration: work.duration,
-                            JobDescription: work.jobDescription
-                        })),
-                       Skills:req.body.skills.map(skills=>({skills:skills.skills})),
-                       Projects:req.body.projects.map(project=>({
-                     Title:project.title,
-                     Date:project.date,
-                     Description:project.description
-                       })),
-                       Achievements:req.body.achievements.map(achievement=>({
-                     Title:achievement.title,
-                     Date:achievement.date,
-                     Organization:achievement.organization,
-                     description:achievement.description
+                    //     })) ||"",
+                    //     WorkExperience:req.body.workExperience.map(work=>({
+                    //         JobTitle: work.jobTitle,
+                    //         CompanyName: work.companyName,
+                    //         Duration: work.duration,
+                    //         JobDescription: work.jobDescription
+                    //     })) ||"",
+                    //    Skills:req.body.skills.map(skills=>({skills:skills.skills})),
+                    //    Projects:req.body.projects.map(project=>({
+                    //  Title:project.title,
+                    //  Date:project.date,
+                    //  Description:project.description
+                    //    })) ||"",
+                    //    Achievements:req.body.achievements.map(achievement=>({
+                    //  Title:achievement.title,
+                    //  Date:achievement.date,
+                    //  Organization:achievement.organization,
+                    //  description:achievement.description
                    
 
-                       })),
+                    //    })) ||"",
                        
-                       Summary:req.body.summary,
-                       Activities:req.body.activities.map(activity=>({
-                        Title:activity.title,
-                        Description:activity.description,
-                        Position:activity.position
-                       })),
+                    //    Summary:req.body.summary,
+                    //    Activities:req.body.activities.map(activity=>({
+                    //     Title:activity.title,
+                    //     Description:activity.description,
+                    //     Position:activity.position
+                    //    })) ||"",
                        
                        
                      
-                       Language: req.body.languages.map(language=>({
-                              Language:language.language,
-                              Proficiency:language.proficiency
+                    //    Language: req.body.languages.map(language=>({
+                    //           Language:language.language,
+                    //           Proficiency:language.proficiency
 
-                       }))
-                      ,
-                       Reference:req.body.references.map(reference=>({
-                         Name:reference.name,
-                         Relationship:reference.relationship,
-                         contact:reference.contact
-                       }))
+                    //    })) ||""
+                    //   ,
+                    //    Reference:req.body.references.map(reference=>({
+                    //      Name:reference.name,
+                    //      Relationship:reference.relationship,
+                    //      contact:reference.contact
+                    //    })) ||""
                        
-                       ,
-                       Certification:req.body.certification.map(certification=>({
-                        Name:certification.name,
-                        Date:certification.date
-                       }))
+                    //    ,
+                    //    Certification:req.body.certification.map(certification=>({
+                    //     Name:certification.name,
+                    //     Date:certification.date
+                    //    })) 
                        
                       
                        
@@ -117,7 +123,7 @@ if(!error.isEmpty()){
 
 
                 }else{
-                    res.status(200).json({success:false, message:"there is some problem "})
+                    res.status(404).json({success:false, message:"there is some problem "})
                 }
 
             } )

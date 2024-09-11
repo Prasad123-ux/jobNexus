@@ -7,7 +7,7 @@ const registerCandidateRoute= express.Router()
 
 
 
-registerCandidateRoute.post('/registerCandidate', registerCandidateValidator, RegisterCandidateController)
+registerCandidateRoute.post('/registerCandidate',registerCandidateValidator, RegisterCandidateController)
 
 
 module.exports={registerCandidateRoute}

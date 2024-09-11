@@ -21,6 +21,11 @@ const { saveJobsRoutes } = require('./Routes/Candidate/SaveJobs')
 const { GetAllSavedJobsRoute } = require('./Routes/Candidate/GetAllSavedJob')
 const { getSimilarJobRoute } = require('./Routes/Candidate/SimilarJob')
 const { AppliedJobRoute } = require('./Routes/Candidate/AppliedJob')
+const { getOtp } = require('./Routes/Candidate/getOtp')
+const { googleRouter } = require('./Routes/Candidate/getMailApi')
+const { updateResume } = require('./Routes/Candidate/SaveResume')
+const { AddEducationRouter } = require('./Routes/Candidate/AddEducation')
+
 
 
 
@@ -47,6 +52,10 @@ app.use('/api/candidate', deleteJobRoute)
 app.use('/api/candidate', GetAllSavedJobsRoute)
 app.use('/api/candidate', getSimilarJobRoute)
 app.use('/api/candidate', AppliedJobRoute)
+app.use('/api/candidate',getOtp)
+app.use('/api/candidate/google',googleRouter)
+app.use('/api/candidate/profile', updateResume)
+app.use('/api/candidate/profile', AddEducationRouter)
 
 
 

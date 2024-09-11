@@ -11,7 +11,7 @@ const getSimilarJobController=(req ,res)=>{
         { JobTitle: { $regex: new RegExp(role, 'i') } }
       ]}).exec()
     .then((user)=>{
-        console.log(user)
+        // console.log(user)
         
         if(user!==null){
             res.status(200).json({success:true, message:"Data Fetched Successfully",data:user})
