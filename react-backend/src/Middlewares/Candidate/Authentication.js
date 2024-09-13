@@ -14,6 +14,7 @@ const candidateAuthenticationMiddleware=(req, res, next)=>{
         req.role= decoded.role
 
         if(req.role=="candidate"){
+            console.log("token verified")
             next()
         }else{
             res.status(404).json({success:true,message:"Unauthorized"})

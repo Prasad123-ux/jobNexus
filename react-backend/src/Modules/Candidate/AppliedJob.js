@@ -1,9 +1,9 @@
 const { mongoose } = require("../../Config/db");
 
-const SaveJobSchema= new mongoose.Schema({
+const ApplyJobSchema= new mongoose.Schema({
     UserEmail:{
         type:String,
-         required:true
+         
     },
     JobID:{
         type:String,
@@ -11,7 +11,7 @@ const SaveJobSchema= new mongoose.Schema({
     }
 }, {timestamps:true})
 
-const SavedJob= mongoose.model('SavedJob', SaveJobSchema)
+const AppliedJobData= mongoose.model('AppliedJobData', ApplyJobSchema)
 
 
-module.exports={SavedJob}
+module.exports={AppliedJobData}

@@ -3,8 +3,9 @@ const { SavedJob } = require("../../Modules/Candidate/SaveJob")
 const { JobDetail } = require("../../Modules/HR/JobDetail")
 
 const SaveJobsController= async (req, res)=>{
-
-    const jobID= req.params.id   
+//    console.log(re)
+    const jobID= req.query.id   
+    console.log(jobID)
 
     const job= await JobDetail.findById(jobID)
     
@@ -13,7 +14,7 @@ const SaveJobsController= async (req, res)=>{
     }else{
         const saveJobObject= new SavedJob ({
             UserEmail:req.email,
-            JobID:jobID
+            JobID:jobID  
 
         })
         saveJobObject.save().then(()=>{
@@ -21,7 +22,7 @@ const SaveJobsController= async (req, res)=>{
 
         })
         .catch((err)=>{
-            res.status(404).json({success:false, message:"Job Not Saved", err:err})
+            res.status(404).json({success:false, message:"Job Not Saved", err:err.message})
 
         })
 

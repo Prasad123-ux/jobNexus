@@ -6,18 +6,19 @@ env.config()
 const jwt= require('jsonwebtoken')
 
 const CandidateLoginController=((req,res)=>{
-    
+    console.log(req.body)
    
-
+const data= req.body.data
+console.log(data)
 
 const error= validationResult(req)
 if(!error.isEmpty()){
-    res.status(403).json({success:true, message:"Data Format is Wrong"})    
+    res.status(403).json({success:false, message:"Data Format is Wrong",error:error.errors[0].msg})    
 }else{
-    JobSeekerDetail.findOne({Email:req.body.email}).exec()
+    JobSeekerDetail.findOne({Email:data.email}).exec()
     .then((user)=>{
         if(user!==null){
-            bcrypt.compare(req.body.password, user.Password)
+            bcrypt.compare(data.password, user.Password)
             .then((value)=>{
                 if(value==true){
                     const token= jwt.sign({email:user.Email, role:user.role}, process.env.JWT_TOKEN,{expiresIn:"30d"})
@@ -25,7 +26,7 @@ if(!error.isEmpty()){
                     
     
                 }else{
-                    res.status(404).json({success:true, message:"Authentication Error"})
+                    res.status(404).json({success:false, message:"Authentication Error"})
                 }
             }).catch((err)=>{
                 res.status(404).json({success:false,message:"Authentication Error"})

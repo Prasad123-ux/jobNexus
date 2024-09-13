@@ -6,7 +6,7 @@ const loginCandidateRoute= express.Router()
 
 
 
-loginCandidateRoute.post('/login_candidate', loginCandidateValidation, CandidateLoginController)
+loginCandidateRoute.post('/loginCandidate', loginCandidateValidation, CandidateLoginController)
 
 
 module.exports={loginCandidateRoute}

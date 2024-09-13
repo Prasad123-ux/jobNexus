@@ -1,3 +1,6 @@
+
+
+
 const { JobSeekerDetail } = require("../../Modules/Candidate/JobSeekers")
 
 const getProfileDataController= async (req, res)=>{
