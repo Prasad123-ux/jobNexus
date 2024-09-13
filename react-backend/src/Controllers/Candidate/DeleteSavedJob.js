@@ -11,8 +11,9 @@ jobID= req.body.jobID
  }else{
     res.status(200).json({success:true, message:"Job Deleted"})
  }
-
-
 }
 
-module.exports={DeleteSavedJobsController}
+
+module.exports={DeleteSavedJobsController}   
+      
+
